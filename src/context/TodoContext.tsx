@@ -2,19 +2,24 @@ import { Children, ReactNode, createContext } from "react";
 import Todo from "../models/todos";
 import { useState } from "react";
 
-export const todoContext = createContext<>(null);
+export const todoContext = createContext<Value | null>(null);
 
 interface myProp {
   children: ReactNode;
 }
 
-function TodoContextData({ children }: myProp) {
+interface Value {
+  todos: Todo[];
+  setTodos(prev: Todo[]): void;
+}
+
+export default function TodoContextData({ children }: myProp): JSX.Element {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const value = {
+  const value: Value = {
     todos,
     setTodos,
   };
 
-  <todoContext.Provider value={value}>{children}</todoContext.Provider>;
+  return <todoContext.Provider value={value}>{children}</todoContext.Provider>;
 }
