@@ -5,15 +5,13 @@ import { todoContext } from "./context/TodoContext";
 import { v4 as uuid } from "uuid";
 
 function App() {
-  const value = useContext(todoContext);
+  const { todos, setTodos } = useContext(todoContext);
+
   const inpref = useRef<HTMLInputElement>(null);
 
   function handleSubmit(evt: React.FormEvent) {
     evt.preventDefault();
-    value?.setTodos([
-      ...value.todos,
-      { id: uuid(), item: inpref.current!.value },
-    ]);
+    setTodos([...todos, { id: uuid(), item: inpref.current!.value }]);
   }
   return (
     <div>

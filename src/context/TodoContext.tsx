@@ -2,7 +2,7 @@ import { Children, ReactNode, createContext } from "react";
 import Todo from "../models/todos";
 import { useState } from "react";
 
-export const todoContext = createContext<Value | null>(null);
+export const todoContext = createContext<Value>(null!);
 
 interface myProp {
   children: ReactNode;
